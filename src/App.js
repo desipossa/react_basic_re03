@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { GlobalReset } from "./pages/CommonStyle"
+import Footer from "./pages/Footer"
+import Header from "./pages/Header"
+import MainVisual from "./pages/MainVisual"
+import MainContent from "./pages/MainContent"
+import MainTab from "./pages/MainTab"
+import Main from "./pages/Main"
+import { Outlet, Route, Routes } from "react-router-dom"
+import Subpage from "./pages/Subpage"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+        <>
+            <GlobalReset />
+            <Header />
+            <Routes>
+                <Route path="/*" element={
+                    <Main>
+                        <MainVisual />
+                        <MainContent />
+                        <MainTab />
+                        <Outlet />
+                    </Main>
+                }>
+                </Route>
+                <Route path="/sub/:subId" element={<Subpage />}></Route>
+            </Routes>
+
+            <Footer />
+        </>
+    )
 }
 
-export default App;
+export default App
